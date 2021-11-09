@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title>{{block "title" .}}
+            Упс...
+            {{end}}</title>
+        <meta charset="utf-8" />
+        <link rel="icon" href="icon">
+    </head>
+    <body>
+        <header>
+            {{block "header" .}}Произошла ошибка{{end}}
+        </header>
+        <div id="content">
+            {{block "content" .}}Не удалось найти данные<br/> Повторите попытку позже{{end}}
+        </div>
+        <footer>
+            {{block "footer" .}} ------Нет данных------- {{end}}
+        </footer>
+    </body>
+</html>
