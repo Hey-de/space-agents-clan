@@ -1,0 +1,29 @@
+map>ul {
+    display: inline-block;
+}
+map ul {
+    list-style-type: none;
+}
+map>ul>li {
+    display: inline;
+    background-color: white;
+    margin-right: 80px;
+
+}
+map a {
+    text-decoration: none;
+    color: inherit;
+}
+map a:hover {
+    cursor: pointer;
+}
+map a:visited {
+    color: inherit;
+    text-decoration: inherit;
+}
+.account-field {
+    display: block;
+    position: fixed;
+    top: 15%;
+    right: 0px;
+}
