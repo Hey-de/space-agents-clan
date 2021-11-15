@@ -1,0 +1,11 @@
+mark {
+    background: white;
+    padding: 0 3px;
+    border: 1px dashed white;
+}
+header {
+    text-align: center;
+}
+.b {
+    border: 29px outset black;
+}

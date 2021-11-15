@@ -1,0 +1,34 @@
+@font-face {
+    font-family: Terminus;
+    src: url("/fonts/TerminusTTF-4.49.1.ttf");
+}
+body {
+    text-align: center;
+    vertical-align: middle;
+    background-color: rgba(0, 0, 0, 0.733);
+    color: white;
+    font-family: Consolas;
+}
+h1 {
+    font-family: Terminus, system-ui;
+    font-weight: normal;
+}
+span {
+    color: red;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+input {
+    margin: 20px;
+    width: 25%;
+    height: 25px;
+    border-radius: 5px;
+    border-color: transparent;
+}
+input[type="submit"] {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    height: 50px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: x-large;
+}

@@ -1,0 +1,44 @@
+@font-face {
+    font-family: Terminus;
+    src: url("/fonts/TerminusTTF-4.49.1.ttf");
+}
+body {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.842);
+}
+h1 {
+    font-family: Terminus, system-ui;
+    font-weight: normal;
+    font-size: 400%;
+    color: white;
+}
+img {
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+input {
+    margin-bottom: 30px;
+    border-radius: 5px;
+    border: 2px transparent;
+    height: 30px;
+    width: 25%;
+}
+input[type="submit"] {
+    background-color: green;
+    color: white;
+
+}
+input:first {
+    margin-top: 30px;
+}
+span {
+    background-color: wheat;
+    border-radius: 20px;
+    padding: 1%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+a {
+    color: green;
+    text-decoration: none;
+}
