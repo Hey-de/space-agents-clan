@@ -12,7 +12,7 @@ func singupHandler(w http.ResponseWriter, r *http.Request) {
 		log.Printf("localhost:7777%s: Error 404", r.URL.Path)
 		return
 	}
-	err := UpdateCounter("index")
+	err := UpdateCounter()
 	if err != nil {
 		http.Error(w, "Internal server error", 500)
 		log.Printf("localhost:7777/: %v", err)

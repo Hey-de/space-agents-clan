@@ -7,45 +7,59 @@ import (
 	"os"
 )
 
-type User struct {
-	Username    string
-	Password    string
-	Privelegies int
-}
-type DataBase struct {
-	Users     map[string]User
-	Usercount uint
+type Users struct {
+	Users map[string]string
 }
 
-func (DataBase) checkPassword(database string, login string, password string) (result bool, er error) {
+type Counter struct {
+	Usercount int
+}
+
+func checkPassword(login string, password string) (bool, error) {
 	var encryptedPasswd = sha1.Sum([]byte(password))
 	var encryptedPasswdDB = fmt.Sprintf("% x", encryptedPasswd)
-	var db, err = ParseDB(database)
+	var db, err = ParseDB("users")
 	if err != nil {
 		return false, err
 	}
-	if db.Users[login].Password == encryptedPasswdDB {
-
+	if db[login] == encryptedPasswdDB {
+		return true, nil
+	} else {
+		return false, nil
 	}
 }
-func ParseDB(db string) (DataBase, error) {
-	var emptyDB = DataBase{}
+func ParseDBInt(db string) (map[string]int, error) {
 	file, err := os.ReadFile("./db/" + db + ".json")
 	if err != nil {
-		return emptyDB, err
+		return nil, err
 	}
-	var result DataBase
+	var result map[string]int
 	err = json.Unmarshal(file, &result)
 	return result, nil
 }
-func UpdateCounter(db string) error {
-	data, err := ParseDB(db)
+func ParseDB(db string) (map[string]interface{}, error) {
+	file, err := os.ReadFile("./db/" + db + ".json")
+	if err != nil {
+		return nil, err
+	}
+	var result map[string]interface{}
+	err = json.Unmarshal(file, &result)
+	return result, nil
+}
+func UpdateDB(data interface{}, db string) error {
+	result, err := json.Marshal(data)
 	if err != nil {
 		return err
 	}
-	data.Usercount++
-
-	result, err := json.Marshal(data)
-	os.WriteFile("./db/"+db+".json", result, 02)
+	err = os.WriteFile("./db/"+db+".json", result, 02)
+	return err
+}
+func UpdateCounter() error {
+	data, err := ParseDBInt("index")
+	if err != nil {
+		return err
+	}
+	data["Usercount"]++
+	err = UpdateDB(data, "index")
 	return err
 }
