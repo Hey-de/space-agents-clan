@@ -1,9 +1,13 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
+
+	"github.com/go-session/session"
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
@@ -18,19 +22,36 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		log.Printf("localhost:7777/: %v", err)
 		return
 	}
+	storage, err := session.Start(context.Background(), w, r)
+	if err != nil {
+		Error500(err, w, r)
+		return
+	}
+	notes, err := ParseDB("data")
+	if err != nil {
+		http.Error(w, "Internal server error", 500)
+		log.Printf("localhost:7777/: %v", err)
+		return
+	}
 	db, err := ParseDB("index")
 	if err != nil {
 		http.Error(w, "Internal server error", 500)
 		log.Printf("localhost:7777/: %v", err)
 		return
 	}
+	notes["Usercount"] = db["Usercount"]
+	login, ok := storage.Get("login")
+	if ok {
+		notes["Login"] = login
+		fmt.Println(login)
+	} else {
+		notes["Login"] = ""
+	}
 	templ, err := template.ParseFiles("ui/index.html")
 	if err != nil {
-		http.Error(w, "Internal server error", 500)
-		log.Printf("localhost:7777/: %v", err)
-		return
+		Error500(err, w, r)
 	}
-	err = templ.Execute(w, db)
+	err = templ.Execute(w, notes)
 	if err != nil {
 		http.Error(w, "Internal server error", 500)
 		log.Printf("localhost:7777/: %v", err)

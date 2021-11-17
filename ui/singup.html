@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <title>SPACE AGENTS</title>
     <link rel="stylesheet" href="/css/login.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
     <h1>Register</h1>
     <img width="100" height="100" src="/favicon.ico" alt="Logo">
     <form action="/users/singup" method="post">
         <input type="text" name="login" id="login" placeholder="Type your login: " required><br>
-        <span id="login-log" hidden></span>
-        <input type="password" name="password" id="passwd" required placeholder="Create your password: "><br>Show password: <input type="checkbox" id="passwd-change"><br>
-        <span id="passwd-log" hidden></span>
+        <span class="error" id="login-log" hidden></span><br>
+        <input type="password" name="password" id="passwd" required placeholder="Create your password: "><br>
+        <span class="error" id="passwd-log" hidden></span><br>
+        Show password: <input type="checkbox" id="passwd-change"><br>
         <input type="password" id="passwd-retype" required placeholder="Retype your password: "><br>
-        <input type="submit" value="Register!" name="doGo">
+        <input type="submit" name="doGo" value="Register!" name="doGo">
     </form>
     <script>
-        function validate() {
+        async function validate(e) {
+            e.preventDefault()
+            var err = false
             var response = await fetch("/users/registered?name="+encodeURIComponent(
                 document.getElementById("login").value))
             if (response.ok) {
@@ -26,21 +28,29 @@
                 if (data == "yes") {
                     document.getElementById("login-log").textContent = "Login exists."
                     if (document.getElementById("login-log").hasAttribute("hidden")) document.getElementById("login-log").removeAttribute("hidden")
+                    err = true
                 }
             } else {
                 alert("Error "+response.status+": "+response.statusText)
+                e.preventDefault()
                 return
             }
-            password = document.getElementById("passwd")
+            var password = document.getElementById("passwd")
             if (password.value.length <= 6) {
                 document.getElementById("passwd-log").textContent = "Password less than 6 charaters."
                 if (document.getElementById("passwd-log").hasAttribute("hidden")) document.getElementById("passwd-log").removeAttribute("hidden")
+                err = true
             }
-            if (password.value == document.getElementById("passwd-retype")) {
-                if (documdocument.getElementById("passwd-log").textContent == "Password less than 6 charaters.") document.getElementById("passwd-log").textContent += "Passwords are not identifity."
-                else document.getElementById("passwd-log").textContent += "Passwords are not identifity."
+            if (password.value != document.getElementById("passwd-retype").value) {
+                if (document.getElementById("passwd-log").textContent == "Password less than 6 charaters.") document.getElementById("passwd-log").textContent += "Passwords are not identifity."
+                else document.getElementById("passwd-log").textContent = "Passwords are not identifity."
                 if (document.getElementById("passwd-log").hasAttribute("hidden")) document.getElementById("passwd-log").removeAttribute("hidden")
+                err = true
             }
+            if (!err) {
+                document.getElementsByTagName("form")[0].submit()
+            }
+            debugger
         }
         document.getElementsByTagName("form")[0].addEventListener("submit", validate)
     </script>

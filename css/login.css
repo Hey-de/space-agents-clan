@@ -5,6 +5,7 @@
 body {
     text-align: center;
     background-color: rgba(0, 0, 0, 0.842);
+    color: white;
 }
 h1 {
     font-family: Terminus, system-ui;
@@ -23,10 +24,21 @@ input {
     height: 30px;
     width: 25%;
 }
+textarea {
+    margin-bottom: 30px;
+    border-radius: 5px;
+    border: 2px transparent;
+    height: 60px;
+    width: 25%;
+}
 input[type="submit"] {
     background-color: green;
     color: white;
 
+}
+input[type="submit"]:hover {
+    cursor: pointer;
+    opacity: 0.8;
 }
 input:first {
     margin-top: 30px;
@@ -41,4 +53,11 @@ span {
 a {
     color: green;
     text-decoration: none;
+}
+.error {
+    display: inline-block;
+    color: red;
+    background-color: black;
+    border-radius: 0%;
+    height: 15px;
 }

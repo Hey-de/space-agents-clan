@@ -2,10 +2,14 @@ mark {
     background: white;
     padding: 0 3px;
     border: 1px dashed white;
+    color: black;
 }
 header {
     text-align: center;
 }
 .b {
     border: 29px outset black;
+}
+body {
+    background-color: rgba(0, 0, 0, 0.842);
 }

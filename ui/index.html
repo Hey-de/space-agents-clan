@@ -5,8 +5,10 @@
 *SPACE AGENTS* #OFFICIAL#
 </title>
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/map.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
-<body background="/img/Screenshot_20191127-180352_Pixel Gun 3D.jpg">
+<body style="background-color: rgba(0, 0, 0, 0.842);">
 <header>
 <h2>
 <mark>
@@ -21,6 +23,20 @@ Pixel gun 3D roleplay web-site
 </mark>
 </p>
 </header>
+<div class="account-field">
+    <div>
+        {{if ne .Login ""}}
+        <mark><span>Hello, {{.Login}}</span></mark><br>
+        <a href="/note">New post</a><hr>
+        <a href="/singin">Sing in as another user</a><hr>
+        <a href="/test">Complete the test</a>
+        {{else}}
+        <a href="/login">Log in</a><hr>
+        <a href="/singup">Sing up</a><hr>
+        <a href="/test">Complete the test</a>
+        {{end}}
+    </div>
+</div>
 <br>
 <table border="4px">
 <tr>
@@ -68,6 +84,17 @@ Gameplay you can see next.
 <br>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/cTuKvgIDRHc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <br>
+{{range .Notes}}
+<p>
+    <mark>
+    {{.Title}} (Owner {{.Owner}})
+    </mark>
+    <br>
+    <img src="/userdata/{{.Owner}}/{{.Image}}" width="750" height="430" alt="" />
+    <br>
+    <iframe width="560" height="315" src="{{.Content}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+{{end}}
 <p>
 <mark>
 I DID IT! WITHOUT DONATING!
@@ -199,5 +226,7 @@ My youtube channel:
 <a href="https://www.youtube.com/channel/UCEDzslafDS95ZPrPB4_4UzA">ArturAgent007</a>
 </mark>
 </p>
+<script>
+</script>
 </body>
 </html>

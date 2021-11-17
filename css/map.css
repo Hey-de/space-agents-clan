@@ -10,20 +10,25 @@ map>ul>li {
     margin-right: 80px;
 
 }
-map a {
+a {
     text-decoration: none;
     color: inherit;
 }
-map a:hover {
+a:hover {
     cursor: pointer;
 }
-map a:visited {
+a:visited {
     color: inherit;
     text-decoration: inherit;
 }
-.account-field {
+
+.account-field div {
+    border-radius: 10px;
     display: block;
     position: fixed;
     top: 15%;
     right: 0px;
+    width: 200px;
+    height: 200px;
+    background-color: white;
 }
