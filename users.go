@@ -5,16 +5,26 @@ import (
 	"crypto/sha1"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
+	"os"
 
 	"github.com/go-session/session"
 )
 
 func userProcessor(w http.ResponseWriter, r *http.Request) {
-	err := r.ParseForm()
-	if err != nil {
-		Error500(err, w, r)
-		return
+	if r.URL.Path != "/users/note" {
+		err := r.ParseForm()
+		if err != nil {
+			Error500(err, w, r)
+			return
+		}
+	} else {
+		err := r.ParseMultipartForm(2080)
+		if err != nil {
+			Error500(err, w, r)
+			return
+		}
 	}
 	switch r.URL.Path {
 	case "/users/login":
@@ -99,6 +109,7 @@ func userProcessor(w http.ResponseWriter, r *http.Request) {
 			Error500(err, w, r)
 			return
 		}
+		os.Mkdir(login, 0777)
 		store.Set("login", login)
 		store.Set("password", sha1.Sum([]byte(password)))
 		err = store.Save()
@@ -144,12 +155,24 @@ func userProcessor(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		fmt.Println(r.PostForm["title"][0])
-		title := r.PostForm["title"][0]
-		textarea := r.PostForm["content"][0]
-		file := r.PostForm["picture"][0]
 		if login, ok := store.Get("login"); ok {
 			if password, ok := store.Get("password"); ok {
-				err = createPost(login.(string), password, title, textarea, file)
+				title := r.PostForm["title"][0]
+				textarea := r.PostForm["content"][0]
+				files := r.MultipartForm.File["pictures"]
+				var fileNames []string
+				for _, f := range files {
+					file, _ := f.Open()
+					fileNames = append(fileNames, f.Filename)
+					tmpfile, err := os.Create("./userdata/" + login.(string) + "/" + f.Filename)
+					if err != nil {
+						Error500(err, w, r)
+					}
+					io.Copy(tmpfile, file)
+					tmpfile.Close()
+					file.Close()
+				}
+				err = createPost(login.(string), password, title, textarea, fileNames)
 				if err != nil {
 					Error500(err, w, r)
 					return

@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/map.css">
 <link rel="stylesheet" href="/css/runstring.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="/js/jquery/jquery-3.6.0.min.js"></script>
 </head>
 <body style="background-color: rgba(0, 0, 0, 0.842);">
 <header>
@@ -91,8 +91,11 @@ Gameplay you can see next.
     {{.Title}} (Owner {{.Owner}})
     </mark>
     <br>
-    <img src="/userdata/{{.Owner}}/{{.Image}}" width="750" height="430" alt="" />
+    {{$owner := .Owner}}
+    {{range .Image}}
+        <img src="/userdata/{{$owner}}/{{.}}" width="750" height="430" alt="" />
     <br>
+    {{end}}
     <iframe width="560" height="315" src="{{.Content}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </p>
 {{end}}
@@ -189,13 +192,6 @@ On Earth had flown another super villain... His name is Hallow. According to him
 </p>
 <p>
 <mark>
-Helping with creating web-site:
-<a href="http://zojkin.ru/">Zojkin.ru</a>
-</mark>
-<br>
-</p>
-<p>
-<mark>
 But in fact Hallow gramps Royal banks and arranges fights. Who will stop him? The police are powerless, it remains to hope for Space Agents!
 </mark>
 <p>
@@ -228,5 +224,12 @@ My youtube channel:
 </mark>
 </p>
 <text-run text="Please support the project!"></text-run>
+<p>
+    <mark>
+    Helping with creating web-site:
+    <a href="http://zojkin.ru/">Zojkin.ru</a>
+    </mark>
+    <br>
+</p>
 </body>
 </html>

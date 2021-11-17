@@ -25,7 +25,7 @@ func findUser(login string) (bool, error) {
 	fmt.Println(db)
 	return ok, nil
 }
-func createPost(login string, password interface{}, title string, content string, picture string) error {
+func createPost(login string, password interface{}, title string, content string, picture []string) error {
 	fmt.Println(login)
 	fmt.Printf("%x", password.([20]uint8))
 	ok, err := comparePasswords(login, fmt.Sprintf("%x", password.([20]uint8)))
@@ -39,7 +39,7 @@ func createPost(login string, password interface{}, title string, content string
 	if err != nil {
 		return err
 	}
-	db["Notes"] = append(db["Notes"], map[string]string{
+	db["Notes"] = append(db["Notes"], map[string]interface{}{
 		"Owner":   login,
 		"Title":   title,
 		"Content": content,
