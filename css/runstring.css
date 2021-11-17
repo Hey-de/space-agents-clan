@@ -26,3 +26,7 @@ text-run::before, text-run::after {
         transform: translateX(-100%);
     }
 }
+footer {
+    position: fixed;
+    width: 100%;
+}
