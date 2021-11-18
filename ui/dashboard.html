@@ -13,9 +13,12 @@
         <ul>
             {{range .Users}}
                 <li>{{.Name}} <input type="number" name="{{.Name}}" min="0", max="4"></li>
+            {{else}}
+                <p>You are suddently only person in this website</p>
             {{end}}
         </ul>
         <input type="submit" name="goGo" value="Update privelegies">
     {{end}}
+    <
 </body>
 </html>
