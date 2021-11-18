@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>*SPACE AGENTS* #OFFICIAL#</title>
     <link rel="stylesheet" href="/css/home.css">
+    <script>
+        function redirect() {
+            open("/note")
+            close()
+        }
+    </script>
 </head>
 <body>
     <h1>Dashboard</h1>
@@ -19,6 +25,6 @@
         </ul>
         <input type="submit" name="goGo" value="Update privelegies">
     {{end}}
-    <
+    <h2>Your posts <input type="button" onclick="redirect()" value="Create new!"></h2>
 </body>
 </html>

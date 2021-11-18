@@ -8,14 +8,6 @@ import (
 	"os"
 )
 
-type Users struct {
-	Users map[string]string
-}
-
-type Counter struct {
-	Usercount int
-}
-
 func findUser(login string) (bool, error) {
 	var db, err = ParseDB("users")
 	if err != nil {
@@ -24,6 +16,20 @@ func findUser(login string) (bool, error) {
 	_, ok := db[login]
 	fmt.Println(db)
 	return ok, nil
+}
+func updatePrivilegies() {
+
+}
+func listUsers() ([]string, error) {
+	var db, err = ParseDB("users")
+	if err != nil {
+		return nil, err
+	}
+	var userList []string
+	for k := range db {
+		userList = append(userList, k)
+	}
+	return userList, nil
 }
 func createPost(login string, password interface{}, title string, content string, picture []string) error {
 	fmt.Println(login)
