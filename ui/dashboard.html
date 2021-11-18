@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>*SPACE AGENTS* #OFFICIAL#</title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <h1>Dashboard</h1>
+    {{if .Privelegies gt 1}}
+        <h2>Privelegies</h2>
+        <form action="/users/privelegies" method="post">
+        <ul>
+            {{range .Users}}
+                <li>{{.Name}} <input type="number" name="{{.Name}}" min="0", max="4"></li>
+            {{end}}
+        </ul>
+        <input type="submit" name="goGo" value="Update privelegies">
+    {{end}}
+</body>
+</html>
