@@ -5,7 +5,7 @@ This website we created for competition
 **Technologies:**
 
 1. Golang
-2. go-sessions [Here GitHub page](https://github.com/go-session/session "Github sources")
+2. go-sessions ([Here GitHub page](https://github.com/go-session/session "Github sources"))
 3. Validation
 4. Templates
 5. MVC(Model-View-Controller)
