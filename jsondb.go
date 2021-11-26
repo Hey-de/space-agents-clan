@@ -17,20 +17,7 @@ func findUser(login string) (bool, error) {
 	fmt.Println(db)
 	return ok, nil
 }
-func updatePrivilegies() {
 
-}
-func listUsers() ([]string, error) {
-	var db, err = ParseDB("users")
-	if err != nil {
-		return nil, err
-	}
-	var userList []string
-	for k := range db {
-		userList = append(userList, k)
-	}
-	return userList, nil
-}
 func createPost(login string, password interface{}, title string, content string, picture []string) error {
 	fmt.Println(login)
 	fmt.Printf("%x", password.([20]uint8))
@@ -82,17 +69,6 @@ func comparePasswords(login string, password string) (bool, error) {
 		return false, nil
 	}
 }
-func comparePasswordsInterface(login string, password interface{}) (bool, error) {
-	var db, err = ParseDB("users")
-	if err != nil {
-		return false, err
-	}
-	if db[login] == password {
-		return true, nil
-	} else {
-		return false, nil
-	}
-}
 func checkPassword(login string, password string) (bool, error) {
 	var encryptedPasswd = sha1.Sum([]byte(password))
 	var encryptedPasswdDB = fmt.Sprintf("%x", encryptedPasswd)
@@ -128,6 +104,8 @@ func ParseDB(db string) (map[string]interface{}, error) {
 	return result, err
 }
 func UpdateDB(data interface{}, db string) error {
+	mu.Lock()
+	defer mu.Unlock()
 	result, err := json.Marshal(data)
 	if err != nil {
 		return err
