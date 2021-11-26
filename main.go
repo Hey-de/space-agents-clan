@@ -3,8 +3,9 @@ package main
 import (
 	"log"
 	"net/http"
+	"sync"
 )
-
+var mu sync.Mutex
 func main() {
 	http.HandleFunc("/favicon.ico", func(rw http.ResponseWriter, r *http.Request) {
 		http.ServeFile(rw, r, "favicon.ico")
