@@ -77,7 +77,7 @@ func checkPassword(login string, password string) (bool, error) {
 	return result, err
 }
 func ParseDBInt(db string) (map[string]int, error) {
-	file, err := os.ReadFile("./db/" + db + ".json")
+	file, err := ioutil.ReadFile("./db/" + db + ".json")
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ func ParseDBInt(db string) (map[string]int, error) {
 	return result, err
 }
 func ParseDBSlice(db string) (map[string][]interface{}, error) {
-	file, err := os.ReadFile("./db/" + db + ".json")
+	file, err := ioutil.ReadFile("./db/" + db + ".json")
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ func UpdateDB(data interface{}, db string) error {
 	if err != nil {
 		return err
 	}
-	_, err = os.Write(result)
+	_, err = file.Write(result)
 	return err
 }
 func UpdateCounter() error {
