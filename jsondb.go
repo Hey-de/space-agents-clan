@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"io/ioutil"
 )
 
 func findUser(login string) (bool, error) {
@@ -95,12 +96,16 @@ func ParseDBSlice(db string) (map[string][]interface{}, error) {
 }
 
 func ParseDB(db string) (map[string]interface{}, error) {
-	file, err := os.ReadFile("./db/" + db + ".json")
+	file, err := os.Open("./db/" + db + ".json")
+	if err != nil {
+		return nil, err
+	}
+	data, err := ioutil.ReadAll(file)
 	if err != nil {
 		return nil, err
 	}
 	var result map[string]interface{}
-	err = json.Unmarshal(file, &result)
+	err = json.Unmarshal(data, &result)
 	return result, err
 }
 func UpdateDB(data interface{}, db string) error {
@@ -110,7 +115,11 @@ func UpdateDB(data interface{}, db string) error {
 	if err != nil {
 		return err
 	}
-	err = os.WriteFile("./db/"+db+".json", result, 02)
+	file, err := os.Open("./db/"+db+".json")
+	if err != nil {
+		return err
+	}
+	_, err = os.Write(result)
 	return err
 }
 func UpdateCounter() error {
