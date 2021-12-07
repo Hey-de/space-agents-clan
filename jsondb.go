@@ -54,3 +54,71 @@ func register(login string, password string) error {
 		return err
 	}
 	sum := sha1.Sum([]byte(password))
+	db[login] = fmt.Sprintf("%x", sum)
+	err = UpdateDB(db, "users")
+	return err
+}
+func comparePasswords(login string, password string) (bool, error) {
+	var db, err = ParseDB("users")
+	if err != nil {
+		return false, err
+	}
+	if db[login] == password {
+		return true, nil
+	} else {
+		return false, nil
+	}
+}
+func checkPassword(login string, password string) (bool, error) {
+	var encryptedPasswd = sha1.Sum([]byte(password))
+	var encryptedPasswdDB = fmt.Sprintf("%x", encryptedPasswd)
+	result, err := comparePasswords(login, encryptedPasswdDB)
+	return result, err
+}
+func ParseDBInt(db string) (map[string]int, error) {
+	file, err := os.ReadFile("./db/" + db + ".json")
+	if err != nil {
+		return nil, err
+	}
+	var result map[string]int
+	err = json.Unmarshal(file, &result)
+	return result, err
+}
+func ParseDBSlice(db string) (map[string][]interface{}, error) {
+	file, err := os.ReadFile("./db/" + db + ".json")
+	if err != nil {
+		return nil, err
+	}
+	var result map[string][]interface{}
+	err = json.Unmarshal(file, &result)
+	return result, err
+}
+
+func ParseDB(db string) (map[string]interface{}, error) {
+	file, err := os.ReadFile("./db/" + db + ".json")
+	if err != nil {
+		return nil, err
+	}
+	var result map[string]interface{}
+	err = json.Unmarshal(file, &result)
+	return result, err
+}
+func UpdateDB(data interface{}, db string) error {
+	mu.Lock()
+	defer mu.Unlock()
+	result, err := json.Marshal(data)
+	if err != nil {
+		return err
+	}
+	err = os.WriteFile("./db/"+db+".json", result, 02)
+	return err
+}
+func UpdateCounter() error {
+	data, err := ParseDBInt("index")
+	if err != nil {
+		return err
+	}
+	data["Usercount"]++
+	err = UpdateDB(data, "index")
+	return err
+}
