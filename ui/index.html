@@ -48,6 +48,20 @@ Pixel gun 3D roleplay web-site
 </td>
 </tr>
 </table>
+{{range .Notes}}
+<p>
+    <mark>
+    {{.Title}} (Owner {{.Owner}})
+    </mark>
+    <br>
+    {{$owner := .Owner}}
+    {{range .Image}}
+        <img src="/userdata/{{$owner}}/{{.}}" width="750" height="430" alt="" />
+    <br>
+    {{end}}
+    <iframe width="560" height="315" src="{{.Content}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br>
+</p>
+{{end}}
 <br>
 <mark>
 Olympics update is here! Greece Gods are fighting on Olympus now.
@@ -63,42 +77,6 @@ Join the fight with new holy weapons
 <br>
 <img src="/img/Screenshot_20200704-112734_Pixel Gun 3D.jpg" width="559" height="467" alt="" />
 <br>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/aVMKReCQDU8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<br>
-<mark>
-[thanks to just spawn who making this videos]
-</mark>
-<br>
-<mark>
-Underwater update is here! You can be ocean creature or a diving group member.
-<br>
-Gameplay you can see next.
-<br>
-[thanks to just spawn who making this videos]
-</mark>
-<br>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/OFeB5JmAcGw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<br>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/atEdgHn-ubg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<br>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/HHeaNYbYZ9M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<br>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/cTuKvgIDRHc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<br>
-{{range .Notes}}
-<p>
-    <mark>
-    {{.Title}} (Owner {{.Owner}})
-    </mark>
-    <br>
-    {{$owner := .Owner}}
-    {{range .Image}}
-        <img src="/userdata/{{$owner}}/{{.}}" width="750" height="430" alt="" />
-    <br>
-    {{end}}
-    <iframe width="560" height="315" src="{{.Content}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</p>
-{{end}}
 <p>
 <mark>
 Brand new anime update is coming! New skins and weapons.
@@ -113,8 +91,6 @@ I want to get warden skin and sword soul card.
 <img src="/img/Screenshot_20200522-151938_Pixel Gun 3D.jpg" width="650" height="330" alt="lance soul card" />
 <br>
 <img src="/img/Screenshot_20200522-152012_Pixel Gun 3D.jpg" width="630" height="500" alt="bow soul card" />
-<br>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/vpPdbEofcUs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </p>
 <p>
 <mark>
@@ -135,8 +111,6 @@ The clan was destroyed, but recently re-created. And began to develop anew.
 <br>
 </p>
 <p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/du7JctbzU8Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<br>
 <mark>
 CITY "PARKOUR 3019" NEWS:The students to go crazy because of the big homework. Now the first class can't count 1*1.
 <br>
@@ -187,7 +161,6 @@ But in fact Hallow gramps Royal banks and arranges fights. Who will stop him? Th
 </mark>
 <p>
 <br>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/gTBXSyab_hg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <img src="/img/20191120_182809.jpg" width="500" height="255" alt="Hallow's weapon" />
 <img src="/img/20191120_182829.jpg" width="500" height="255" alt="Hallow's weapon" />
 <img src="/img/20191120_182919.jpg" width="500" height="255" alt="Hallow's weapon" />
@@ -198,8 +171,8 @@ But in fact Hallow gramps Royal banks and arranges fights. Who will stop him? Th
 <td valign="top" background="/img/Screenshot_20191120-181101_Instagram.jpg">robbed money</td>
 </tr>
 <tr>
-<td valign="top" width="150" background="/img/vhm9Yu38zy0.jpg">523542462527 Dollars</td>
-<td valign="top" background="/img/vhm9Yu38zy0.jpg">2133459 Dollars</td>
+<td valign="top" width="150">523542462527 Dollars</td>
+<td valign="top">2133459 Dollars</td>
 </tr>
 </table>
 <p>

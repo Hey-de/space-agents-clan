@@ -13,3 +13,9 @@ header {
 body {
     background-color: rgba(0, 0, 0, 0.842);
 }
+table td {
+    background: white;
+    padding: 0 3px;
+    border: 1px dashed white;
+    color: black;
+}
