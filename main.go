@@ -1,20 +1,19 @@
 package main
 
 import (
-	"flag"
 	"log"
 	"net/http"
 	"sync"
+	"os"
 )
 
 var mu sync.Mutex
 
 func main() {
-	var addr = flag.String("addr", "localhost:7777", "Address of the website")
-	var useTls = flag.Bool("tls", false, "Use TLS")
-	var tlsCertFile = flag.String("tcf", "./cert/server.crt", "Certification file for TLS")
-	var tlsKeyFile = flag.String("tkf", "./cert/server.key", "Key file for TLS")
-	flag.Parse()
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
 	http.HandleFunc("/favicon.ico", func(rw http.ResponseWriter, r *http.Request) {
 		http.ServeFile(rw, r, "favicon.ico")
 	})
@@ -30,9 +29,5 @@ func main() {
 	http.HandleFunc("/test", testHandler)
 	http.HandleFunc("/check", testChecker)
 	http.HandleFunc("/", indexHandler)
-	if *useTls {
-		log.Fatal(http.ListenAndServeTLS(*addr, *tlsCertFile, *tlsKeyFile, nil))
-	} else {
-		log.Fatal(http.ListenAndServe(*addr, nil))
-	}
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
